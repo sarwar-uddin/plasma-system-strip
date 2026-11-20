@@ -1,0 +1,15 @@
+{
+  "KPlugin": {
+    "Id": "com.github.sarwaruddin.systemstrip",
+    "Name": "System Strip",
+    "Description": "CPU, RAM, GPU, network and disk history charts in one compact meteogram-style widget",
+    "Category": "System Information",
+    "Icon": "utilities-system-monitor",
+    "License": "GPL-2.0-or-later",
+    "Version": "1.0.0",
+    "Website": "https://github.com/sarwar-uddin/plasma-system-strip",
+    "Authors": [{ "Name": "Sarwar Uddin" }]
+  },
+  "KPackageStructure": "Plasma/Applet",
+  "X-Plasma-API-Minimum-Version": "6.0"
+}

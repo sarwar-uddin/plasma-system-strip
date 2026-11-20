@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="General">
+    <entry name="gpuSensor" type="String">
+      <label>GPU sensor prefix, e.g. gpu/gpu0, gpu/gpu1 or gpu/all</label>
+      <default>gpu/gpu0</default>
+    </entry>
+    <entry name="gpuMetric" type="String">
+      <label>What the GPU chart plots: "usage" (busy %) or "clock" (core clock as % of max)</label>
+      <default>usage</default>
+    </entry>
+    <entry name="diskSensor" type="String">
+      <label>Disk sensor prefix, e.g. disk/all or disk/nvme0n1</label>
+      <default>disk/all</default>
+    </entry>
+    <entry name="networkSensor" type="String">
+      <label>Network sensor prefix, e.g. network/all or network/wlan0</label>
+      <default>network/all</default>
+    </entry>
+    <entry name="historySeconds" type="Int">
+      <label>Seconds of history shown in each chart</label>
+      <default>90</default>
+      <min>20</min>
+      <max>600</max>
+    </entry>
+  </group>
+</kcfg>
