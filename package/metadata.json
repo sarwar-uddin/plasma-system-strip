@@ -6,7 +6,7 @@
     "Category": "System Information",
     "Icon": "utilities-system-monitor",
     "License": "GPL-2.0-or-later",
-    "Version": "1.0.0",
+    "Version": "1.1.0",
     "Website": "https://github.com/sarwar-uddin/plasma-system-strip",
     "Authors": [{ "Name": "Sarwar Uddin" }]
   },

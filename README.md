@@ -15,7 +15,9 @@ A compact KDE Plasma 6 desktop widget that shows live history charts for CPU, RA
 
 The header shows CPU and GPU temperature when the sensors report one. Each value turns crimson at 85 °C or above.
 
-On the desktop the widget draws its charts in place. In a panel it shows an icon, and clicking the icon opens the charts in a popup.
+On the desktop the widget draws its charts in place. In a horizontal panel it shows two tiny live sparklines with percentages, CPU in crimson and RAM in silver, and clicking them opens the full charts as a popup. In a vertical panel it falls back to an icon.
+
+![System Strip in a panel](screenshots/panel.png)
 
 ## Requirements
 
@@ -83,6 +85,7 @@ package/
   contents/ui/main.qml          sensors, history buffers, layout
   contents/ui/Quadrant.qml      one chart cell (legend + chart)
   contents/ui/HistoryChart.qml  Canvas chart: grid, smoothed lines, gradient fill
+  contents/ui/Sparkline.qml     tiny panel chart
   contents/ui/configGeneral.qml settings page
 ```
 

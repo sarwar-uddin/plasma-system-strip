@@ -101,12 +101,70 @@ PlasmoidItem {
         }
     }
 
-    // Full charts on the desktop; icon + popup when placed in a panel.
+    // Full charts on the desktop; mini sparklines + popup when placed in a panel.
     preferredRepresentation: Plasmoid.formFactor === PlasmaCore.Types.Planar ? fullRepresentation : compactRepresentation
     switchWidth: Kirigami.Units.gridUnit * 20
     switchHeight: Kirigami.Units.gridUnit * 12
     toolTipMainText: i18n("System Strip")
     toolTipSubText: i18n("CPU %1 · RAM %2 · GPU %3", pct(cpu.value), pct(ram.value), gpuClockMode ? fmtMHz(gpuF.value) : pct(gpuU.value))
+
+    compactRepresentation: MouseArea {
+        id: compact
+        readonly property bool vertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
+        hoverEnabled: true
+        onClicked: root.expanded = !root.expanded
+
+        Layout.minimumWidth: vertical ? -1 : miniRow.implicitWidth
+        Layout.preferredWidth: vertical ? -1 : miniRow.implicitWidth
+        Layout.maximumWidth: vertical ? Infinity : miniRow.implicitWidth
+
+        // Vertical panels are too narrow for sparklines: fall back to the icon.
+        Kirigami.Icon {
+            anchors.fill: parent
+            visible: compact.vertical
+            source: Plasmoid.icon
+            active: compact.containsMouse
+        }
+
+        RowLayout {
+            id: miniRow
+            visible: !compact.vertical
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: Kirigami.Units.smallSpacing
+
+            Repeater {
+                model: [
+                    { label: "CPU", data: root.cpuHist, rgb: root.crimson, value: cpu.value },
+                    { label: "RAM", data: root.ramHist, rgb: root.silver, value: ram.value }
+                ]
+                delegate: RowLayout {
+                    required property var modelData
+                    spacing: 3
+                    Rectangle {
+                        Layout.preferredWidth: Kirigami.Units.gridUnit * 2.4
+                        Layout.preferredHeight: Math.max(12, compact.height - 6)
+                        radius: 2
+                        color: "#0D0D0F"
+                        border.color: "#2A2A2E"
+                        Sparkline {
+                            anchors.fill: parent
+                            anchors.margins: 2
+                            values: modelData.data
+                            rgb: modelData.rgb
+                        }
+                    }
+                    PC3.Label {
+                        text: root.pct(modelData.value)
+                        font: Kirigami.Theme.smallFont
+                        // fixed width so the panel doesn't jitter as digits change
+                        Layout.preferredWidth: tm.advanceWidth
+                        horizontalAlignment: Text.AlignRight
+                        TextMetrics { id: tm; font: Kirigami.Theme.smallFont; text: "100%" }
+                    }
+                }
+            }
+        }
+    }
 
     fullRepresentation: Item {
         Layout.minimumWidth: Kirigami.Units.gridUnit * 26
